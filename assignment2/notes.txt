@@ -1,0 +1,240 @@
+#######################################
+my notes
+#######################################
+
+https://class.coursera.org/neuralnets-2012-001/forum/thread?thread_id=454
+
+
+cd /Development/hinton-coursera/assignment2
+
+load data.mat
+fieldnames(data)
+data.vocab
+[train_x, train_t, valid_x, valid_t, test_x, test_t, vocab] = load_data(100);
+model = train(1);
+
+.. 1 epoch
+Average Training CE 4.405
+Finished Training.
+Final Training CE 4.405
+Running validation ...
+Final Validation CE 4.394
+Running test ...
+Final Test CE 4.402
+Training took 61.82 seconds
+
+Question 1
+.. 10 epoc & basic settings
+batchsize = 100;  % Mini-batch size.
+learning_rate = 0.1;  % Learning rate; default = 0.1.
+momentum = 0.9;  % Momentum; default = 0.9.
+numhid1 = 50;  % Dimensionality of embedding space; default = 50.
+numhid2 = 200;  % Number of units in hidden layer; default = 200.
+init_wt = 0.01; 
+— .. bad settings
+Average Training CE 2.935
+Finished Training.
+Final Training CE 2.935
+Running validation ...
+Final Validation CE 2.927
+Running test ...
+Final Test CE 2.926
+Training took 632.67 seconds
+xxxxx= 2.927xxxx
+oops = should be:
+= 2.605
+
+Question 2
+.. 10 epoc & basic settings
+init_wt = 0.0001;
+ 
+= ? Cross Entropy on the training and validation set decreases very slowly.
+
+
+Question 3
+= 5.521
+
+Question 4
+modelRatedot1Epochs1
+Final Training CE 3.965
+Final Validation CE 3.311
+Final Test CE 3.310
+Training took 59.15 seconds
+
+modelRatedot001Epochs1
+Average Training CE 4.431
+Finished Training.
+Final Training CE 4.431
+Final Validation CE 4.386
+Final Test CE 4.393
+Training took 61.85 seconds
+
+modelRate10Epochs1
+Average Training CE 4.711
+Final Training CE 4.711
+Final Validation CE 4.662
+Final Test CE 4.668
+Training took 72.37 seconds
+
+Lowest Training Set = modelRatedot1Epochs1
+
+Question 5
+modelRatedot1Epochs10
+Average Training CE 2.537
+Final Training CE 2.537
+Final Validation CE 2.603
+Final Test CE 2.612
+Training took 875.76 seconds
+
+modelRatedot001Epochs10
+Final Training CE 4.378
+Final Validation CE 4.380
+Final Test CE 4.386
+Training took 599.65 seconds
+
+modelRate10Epochs10
+Average Training CE 4.665
+Final Training CE 4.665
+Final Validation CE 4.662
+Final Test CE 4.668
+Training took 529.67 seconds
+
+Lowest Training Set = modelRatedot1Epochs1
+
+Question 6
+Model A: 5 dimensional embedding, 100 dimensional hidden layer
+Model B: 50 dimensional embedding, 10 dimensional hidden layer
+Model C: 50 dimensional embedding, 200 dimensional hidden layer
+Model D: 100 dimensional embedding, 5 dimensional hidden layer
+
+Model A: model5DEmbeddingx100DHiddenEpochs10 
+Final Training CE 2.809
+Final Validation CE 2.830
+Final Test CE 2.833
+Training took 345.67 seconds
+
+Model B: model50DEmbeddingx10DHiddenEpochs10 
+Final Training CE 3.004
+Final Validation CE 3.016
+Final Test CE 3.014
+Training took 328.07 seconds
+
+
+Model C: model50DEmbeddingx200DHiddenEpochs10 
+Final Training CE 2.536
+Final Validation CE 2.609
+Final Test CE 2.619
+Training took 1146.43 seconds
+
+
+Model D: model100DEmbeddingx5DHiddenEpochs10
+Final Training CE 3.223
+Final Validation CE 3.228
+Final Test CE 3.221
+Training took 424.23 seconds
+
+6&7 = C
+
+Q8
+Train three models each with 50 dimensional embedding space, 200 dimensional hidden layer. 
+Model A: Momentum = 0.0
+Model B: Momentum = 0.5
+Model C: Momentum = 0.9
+
+Model A: modelMomentum0Epochs5
+Final Training CE 3.289
+Final Validation CE 3.255
+Final Test CE 3.253
+Training took 513.86 seconds
+
+Model B: modelMomentum0dot5Epochs5
+Final Training CE 2.936
+Final Validation CE 2.926
+Final Test CE 2.926
+Training took 553.90 seconds
+
+Model C: modelMomentum0dot9Epochs5
+Final Training CE 2.537
+Final Validation CE 2.607
+Final Test CE 2.620
+Training took 3356.78 seconds
+
+q8 = C = modelMomentum0dot9Epochs5
+
+q9
+word_distance('day', 'year', modelRatedot1Epochs10)
+= 2.1967
+word_distance('day', ‘today’, modelRatedot1Epochs10)
+= 3.4979
+word_distance('day', ‘week’, modelRatedot1Epochs10)
+= 1.9430
+word_distance('day', ‘during’, modelRatedot1Epochs10)
+= 3.9721
+
+q10 Both words occur very rarely, so their embedding weights get updated very few times and remain close to their initialization.
+
+q11 The model does not care about gender. It puts them close because if 'he' occurs in a 4-gram, it is very likely that substituting it by 'she' will also make a sensible 4-gram.
+
+q12 Words that can be substituted for one another and still make up a sensible 4-gram.
+
+
+
+— — 
+% SET HYPERPARAMETERS HERE.
+batchsize = 100;  % Mini-batch size.
+learning_rate = 0.1;  % Learning rate; default = 0.1.
+momentum = 0.9;  % Momentum; default = 0.9.
+numhid1 = 50;  % Dimensionality of embedding space; default = 50.
+numhid2 = 500;  % Number of units in hidden layer; default = 200.
+init_wt = 0.01;  % Standard deviation of the normal distribution
+                 % which is sampled to get the initial weights; default = 0.01
+model50DEmbeddingx500DHiddenEpochs50
+Final Training CE 2.099
+Final Validation CE 2.709
+Final Test CE 2.724
+Training took 29498.18 seconds
+
+— — 
+— — ******* — — ******* — — ******* — — 2.603
+modelRatedot1Epochs10
+Final Training CE 2.537
+Final Validation CE 2.603
+Final Test CE 2.612
+Training took 875.76 seconds
+
+modelRatedot5Epochs10
+Final Training CE 2.580
+Final Validation CE 2.694
+Final Test CE 2.708
+Training took 573.40 seconds
+
+modelRatedot05Epochs10
+Average Training CE 2.649
+Final Training CE 2.649
+Final Validation CE 2.676
+Final Test CE 2.680
+
+modelRatedot09Epochs10
+Final Training CE 2.546
+Final Validation CE 2.616
+Final Test CE 2.626
+Training took 557.75 seconds
+
+modelRatedot11Epochs10
+Final Training CE 2.528
+Final Validation CE 2.604
+Final Test CE 2.617
+Training took 673.10 seconds
+
+
+— — 
+% SET HYPERPARAMETERS HERE.
+model250DEmbeddingx500DHiddenEpochs100
+Final Training CE 1.792
+Final Validation CE 3.105
+Final Test CE 3.105
+Training took 22355.94 seconds
+
+— — 
+allDataModelRatedot1Epochs10
+Final Training CE2.507
